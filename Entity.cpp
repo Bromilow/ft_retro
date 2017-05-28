@@ -3,7 +3,7 @@
 
 /////////////////////////////////[  constructor/destructor  ]////////////////////////////////////////
 
-Entity::Entity(void) : this->_character = '8'
+Entity::Entity(void) : _character = '8' ,this->_xLoc = getMax(), this->_yLoc = (rand(getMax()) % getmax());
 {
     shoot(*this);
 
@@ -21,13 +21,13 @@ Entity::~Entity(void)
     return;
 }
 
-Entity::Entity(int num) : this->_character = '8';        // saving the charactor
+Entity::Entity(int num) : this->_character = '8',     // saving the charactor
 {
     this->_object = new Entity[num];
 
     for (int i = 0; i < num ; i++) { 
         // flips time function here !!!
-        shoot(this->_object[i], rand());     //// get random X number of window size and send though a copy
+        shoot(this->_object[i], rand(getmax(Y)));     //// get random X number of window size and send though a copy
     }
 }
 /////////////////////////////////[  overloaded operators  ]////////////////////////////////////////
@@ -47,7 +47,7 @@ Entity& Entity::operator=(Entity const & rhs)
 
 /////////////////////////////////[  member functions  ]////////////////////////////////////////
 
-int             *Entity::getlocation() 
+int             *Entity::getLocation() 
 {
     int    i[2];
     i[0] = this->_yLoc;
@@ -56,10 +56,10 @@ int             *Entity::getlocation()
     return(i);
 }
 
-void			Entity::setlocation(int x ,int y)
+void			Entity::setLocation(int x ,int y)
 {
-    this->_xloc = i[0];
-    this->_yloc = i[1];
+    this->_xLoc = x;
+    this->_yLoc = y;
 }
 
 
@@ -67,22 +67,18 @@ void			Entity::setlocation(int x ,int y)
 void    Entity::shoot(Entity object, int location)
 {
 
-    /*
-    this->_xLoc = x;                                                //get maxwindow size function
-    this->_yLoc = (rand(y) % y);
-    */
-    if ((hitPlayer() == false) && (hitBullet() == false))       // include bullets and player
+    if ((hitPlayer() == false) && (hitBullet() == false))
     {
         this->_xLoc--;
     }
-    if (this->xLoc == 0)
-        setLocation(getmaxXlocation, location);                      // start loop again
+    if (this->_xLoc == 0)
+        setLocation(getMax(Y), location);                      // start loop again
 }
 
 bool        Entity::hitPlayer()
 {
-    int *pLoc = getplayerlocation();//get player location!!!!
-    if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for unit collision
+    int *pLoc = getLocation();
+    if (((this->_xLoc == pLoc[0]) && (this->_yLoc == pLoc[1]))       // check for unit collision
     {
         delete this;
         return true
@@ -92,8 +88,8 @@ bool        Entity::hitPlayer()
 
 bool        Entity::hitBullet()
 {
-    int *pLoc = getlocation();//get player location!!!!
-    if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for Bullet collision
+    int *pLoc = getLocation();//get player location!!!!
+    if (((this->_xLoc == pLoc[0]) && (this->_yLoc == pLoc[1]))       // check for Bullet collision
     {
         delete this;
         return true

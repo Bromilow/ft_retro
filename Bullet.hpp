@@ -9,22 +9,20 @@
 class Bullet : Public Base
 {
 	public:
-		Bullet(void);
-		Bullet(Bullet const & src);
-		Bullet& operator=(Bullet const & rhs);
-		~Bullet(void);
 
-int			*getlocation();
-void		setlocation(int x, int y);
+Bullet(void);
+Bullet(Bullet const & src);
+Bullet& operator=(Bullet const & rhs);
+~Bullet(void);
+
+int			*getLoc();
+void		setLoc(int x, int y);
 
 
 void	    displayBullet();
 void    	shoot(Bullet object);                         // fly accross the screen
-void        hitPlayer();
-void        hitBullet();
+bool        hitobject();
 
-
-		
 
 	private:
 
@@ -32,8 +30,6 @@ void        hitBullet();
 		int		_yLoc;
         char	_character;
 		int		*location;
-
-
 };
 
 #endif

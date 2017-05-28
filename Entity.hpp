@@ -22,8 +22,8 @@ Entity(WINDOW * win, int _yMax);
 Entity& operator=(Entity const & rhs);
 ~Entity(void);
 
-int				*getLocation();
-void			setLocation(int x, int y);
+int				*getLoc();                        //    entity location
+void			setLoc(int x, int y);
 
 void    		shoot(Entity object, int location);          
 bool         	hitPlayer();
@@ -31,7 +31,7 @@ bool         	hitBullet();
 
 	private:
 
-int		_xmax;
+int		_xMax;
 int		_xLoc;
 int		_yLoc;
 Entity  *_object;

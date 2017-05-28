@@ -35,18 +35,16 @@ Bullet& Bullet::operator=(Bullet const & rhs)
 
 /////////////////////////////////[  member functions  ]////////////////////////////////////////
 
-void    Bullet::shoot(object)
+void    Bullet::shoot(Bullet object)
 {
 
-    int *pLoc = getplayerLocation();                                 // we need the player location function
-    setLocation(pLoc[0], pLoc[1])
-    if ((hitobject() != 1))                                      //get x max for bullet end
-    {
-        setLocation(pLoc[0] += 1, pLoc[1])
-    }
+    int *pLoc = getLocation();
+    setLocation(pLoc[0], pLoc[1]);
+    setLocation(pLoc[0] += 1, pLoc[1]);
+
 }
 
-int             *Bullet::getlocation() 
+int             *Bullet::getLoc() 
 {
     int    i[2];
     i[0] = this->_yLoc;
@@ -55,15 +53,27 @@ int             *Bullet::getlocation()
     return(i);
 }
 
-void			Bullet::setlocation(int x ,int x)
+void			Bullet::setLoc(int x ,int y)
 {
-    this->_xloc = i[0];
-    this->_yloc = i[1];
+    this->_xLoc = x;
+    this->_yLoc = y;
+}
+/*
+bool        Bullet::hitObject();
+{
+    int **pLoc = getObjectsLocation();
+    if (((this->xLoc == ) && (this->yloc == pLoc[1]))
+    {
+        return true;
+    }
+    return false;
 }
 
 
 
-/*         ----- if we have a boss that can shoot back
+
+getObjectsLocation
+        ----- when we have a boss that can shoot back
 
 bool           Bullet::hitPlayer();
 {
@@ -77,12 +87,3 @@ bool           Bullet::hitPlayer();
 }
 */
 
-bool        Bullet::hitBullet();
-{
-    int *pLoc = getlocation();
-    if (((this->xLoc == pLoc[0]) && (this->yloc == pLoc[1]))       // check for bullet collision
-    {
-        return true;
-    }
-    return false;
-}
